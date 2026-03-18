@@ -1,0 +1,21 @@
+{
+  "name": "branchout-marketplace",
+  "owner": {
+    "name": "Branchout"
+  },
+  "metadata": {
+    "description": "Branchout projected monorepo manager — skills and plugins for LLM coding agents",
+    "version": "1.0.1"
+  },
+  "plugins": [
+    {
+      "name": "branchout-skills",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Branchout/branchout-skills.git"
+      },
+      "description": "Skills for the Branchout projected monorepo manager — workspace setup, commands, and conventions",
+      "version": "1.0.1"
+    }
+  ]
+}
