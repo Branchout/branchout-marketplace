@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-marketplace_version=$(yq -r '.metadata.version' .claude-plugin/marketplace.json)
+exit_code=0
 
-if [[ "${marketplace_version}" != "${VERSION}" ]]; then
-  echo "Version mismatch: marketplace.json has '${marketplace_version}' but calculated version is '${VERSION}'"
+for file in .claude-plugin/marketplace.json .cursor-plugin/marketplace.json; do
+  if [[ -f "${file}" ]]; then
+    file_version=$(yq -r '.metadata.version' "${file}")
+    if [[ "${file_version}" != "${VERSION}" ]]; then
+      echo "Version mismatch: ${file} has '${file_version}' but calculated version is '${VERSION}'"
+      exit_code=1
+    else
+      echo "Version verified: ${file} = ${file_version}"
+    fi
+  fi
+done
+
+if [[ ${exit_code} -ne 0 ]]; then
   echo "Version must match, please update it with each PR for the next version or the PR build will fail."
-  exit 1
 fi
 
-echo "Version verified: ${marketplace_version}"
+exit ${exit_code}

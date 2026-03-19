@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Branchout projected monorepo manager — skills and plugins for LLM coding agents",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "plugins": [
     {
